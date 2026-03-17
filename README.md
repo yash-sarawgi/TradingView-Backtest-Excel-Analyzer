@@ -7,7 +7,7 @@ exports.
 Instead of manually analyzing strategy results, this tool processes
 TradingView trade export files and produces a **fully formatted
 analytics dashboard inside Excel**, including performance metrics, risk
-analysis, and visual charts.
+analysis, and visual charts — alongside a **professional dark-themed PDF report**.
 
 Designed for **systematic traders, quantitative researchers, and
 strategy developers**.
@@ -79,6 +79,23 @@ These allow **quick visual inspection of strategy performance**.
 
 ------------------------------------------------------------------------
 
+## PDF Report
+
+In addition to the Excel file, the tool automatically generates a **professional PDF report** containing:
+
+-   Stock / Symbol, Strategy Name, and Backtest Date Range in the header
+-   Key performance metric cards (Net Profit, Profit Factor, Win Rate, etc.)
+-   Full metrics table with colour-coded values
+-   Daily equity curve chart with cumulative P&L and daily P&L bar chart
+-   Day of Week and Hour of Day analysis — tables and charts side by side
+-   Monthly performance breakdown
+-   Trade P&L distribution chart
+-   Drawdown and risk metrics
+
+The PDF is generated automatically alongside the Excel file — no extra steps required.
+
+------------------------------------------------------------------------
+
 # Installation
 
 ## Requirements
@@ -88,7 +105,7 @@ Python **3.7 or higher**
 Install required dependencies:
 
 ``` bash
-pip install pandas openpyxl
+pip install pandas openpyxl matplotlib reportlab
 ```
 
 ------------------------------------------------------------------------
@@ -103,6 +120,7 @@ pip install pandas openpyxl
     ├── Advanced_Analyzed_Report_Example.pdf
     ├── VWAP_Scalping_Strategy_NASDAQ_PYPL_2026-02-13.xlsx
     ├── VWAP_Scalping_Strategy_NASDAQ_PYPL_2026-02-13_analyzed.xlsx
+    ├── VWAP_Scalping_Strategy_NASDAQ_PYPL_2026-02-13_analyzed.pdf
     │
     ├── LICENSE
     └── README.md
@@ -142,12 +160,14 @@ Example:
 python tradingview_excel_analyzer.py VWAP_Scalping_Strategy_NASDAQ_PYPL_2026-02-13.xlsx
 ```
 
-This will generate:
+This will generate **two output files**:
 
     VWAP_Scalping_Strategy_NASDAQ_PYPL_2026-02-13_analyzed.xlsx
+    VWAP_Scalping_Strategy_NASDAQ_PYPL_2026-02-13_analyzed.pdf
 
-The output file will contain the original sheets plus a new **Advanced
-Analysis** sheet with performance metrics and charts.
+The Excel file will contain the original sheets plus a new **Advanced
+Analysis** sheet with performance metrics and charts.  
+The PDF file will contain a fully formatted standalone report of the same analysis.
 
 ------------------------------------------------------------------------
 
@@ -168,13 +188,13 @@ The script will:
 
 1.  Detect all Excel files in the folder
 2.  Analyze each file
-3.  Automatically generate analyzed versions
+3.  Automatically generate analyzed Excel and PDF versions
 
 Example:
 
-    strategy1.xlsx → strategy1_analyzed.xlsx
-    strategy2.xlsx → strategy2_analyzed.xlsx
-    strategy3.xlsx → strategy3_analyzed.xlsx
+    strategy1.xlsx → strategy1_analyzed.xlsx + strategy1_analyzed.pdf
+    strategy2.xlsx → strategy2_analyzed.xlsx + strategy2_analyzed.pdf
+    strategy3.xlsx → strategy3_analyzed.xlsx + strategy3_analyzed.pdf
 
 ------------------------------------------------------------------------
 
@@ -225,9 +245,6 @@ Some possible enhancements for future development ideas include:
 
 - **Extended backtest parameters**  
   Support for additional metrics and configurable parameters from TradingView exports to enable deeper performance analysis and strategy diagnostics.
-
-- **Automated PDF report generation**  
-  Generate structured **PDF reports directly from the analysis output**, allowing traders to easily share strategy performance summaries.
 
 - **Multi-file report aggregation (Strategy Comparison Dashboard)**  
   Combine results from multiple analyzed backtests into a **single consolidated summary report**, enabling comparison between different strategies, assets, or parameter variations.
